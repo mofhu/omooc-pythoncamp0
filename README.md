@@ -10,3 +10,5 @@ readme告诉别人如何使用你的软件，是项目的门面，一般包括�
 
 ## modified by Frank Hu
 test for revision on web
+
+## test for git in terminal at mac
