@@ -24,6 +24,12 @@ Let's begin!
 
 	need some details
 
+	git commit -m "the description of changes, will be shown in logs, so it's important"
+
+	git commit -a -m "description"
+
+		commit all changes in files git has ALREADY managed. (i.e. not applied to files not added. so to apply all changes, using git add before git commit.)
+
 3. git status
 
 4. git diff
