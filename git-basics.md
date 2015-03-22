@@ -1,9 +1,9 @@
-# Git learning log
+# Git Basics
 
 ## Quick Notes
 
 * Set up: `git init`
-* Change and commit: `git add <file>`, `git commit -m "description"`
+* Change and commit: `git add <file>`, `git commit -am "description"`
 * Find changes: `git status`, `git diff`, `git log`
 * Reset: `git reset --hard commit_id`
 * Remote: `git remote add origin <link>`, `git clone <link>`
@@ -13,9 +13,9 @@
 
 ## Objectives:
 
-### minimal commands for git starter in terminal
+* Minimal commands for git starter in terminal
 
-### enough commands for git in terminal
+* Enough commands for git in terminal
 
 Let's begin!
 
@@ -37,9 +37,9 @@ Let's begin!
 
 	`git commit -m "the description of changes, will be shown in logs, so it's important"`
 
-	`git commit -a -m "description"`
+	`git commit -am "description"`
 
-		commit all changes ONLY in files git has already managed. (i.e. not applied to files not added. so to apply all changes, using git add before git commit.)
+	commit all changes ONLY in files git has already managed. (i.e. not applied to files not added. so to apply all changes, using git add before git commit.)
 
 	git add and git commit
 
@@ -55,25 +55,25 @@ Let's begin!
 
 	`git rm`
 
-		`git checkout`  can be used for replacing files in working folder.
+	`git checkout` can be used for replacing files in working folder.
 
 6. On resetting
 
 	`git reset --hard commit_id`
 
-		HEAD: this version
+	HEAD: this version
 
-		HEAD^, HEAD^^, HEAD~100
+	HEAD^, HEAD^^, HEAD~100
 
-		>normal commit id: commit 31dc03905a9866775fe45ac8ae22382c685ce66e
+	>normal commit id: commit 31dc03905a9866775fe45ac8ae22382c685ce66e
 
 	`git log`
 
-		to get commit id.
+	to get commit id.
 
 	`git reflog`
 
-		to get to a later version.
+	to get to a later version.
 
 
 ### remote, push and pull
@@ -86,7 +86,7 @@ Let's begin!
 
 	`git push origin master`
 
-		for later pushes
+	for later pushes
 
 ### branching
 
