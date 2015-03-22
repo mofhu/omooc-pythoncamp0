@@ -1,14 +1,8 @@
 # README
 
-## readme是什么
+# Python Book v1.0
 
-readme告诉别人如何使用你的软件，是项目的门面，一般包括如何安装，如何使用等等
+Copyright Frank Hu [Frank-the-Obscure@GitHub](https://github.com/Frank-the-Obscure), 2015
 
-## fork这个项目
+## 
 
-现在，把这个项目fork到你的库里，点击右上角的fork
-
-## modified by Frank Hu
-test for revision on web
-
-## test for git in terminal at mac
