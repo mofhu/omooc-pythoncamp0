@@ -1,5 +1,16 @@
 # Git learning log
 
+## Quick Notes
+
+* Set up: `git init`
+* Change and commit: `git add <file>`, `git commit -m "description"`
+* Find changes: `git status`, `git diff`, `git log`
+* Reset: `git reset --hard commit_id`
+* Remote: `git remote add origin <link>`, `git clone <link>`
+* Push and pull: `git push -u origin master`, `git push origin master`
+* Branch and tag: `git branch (branch)`, `git checkout`, `git branch -d <branch>`, `git tag <tag-name>`
+
+
 ## Objectives:
 
 ### minimal commands for git starter in terminal
@@ -67,7 +78,7 @@ Let's begin!
 
 ### remote, push and pull
 
-1. `git remote add origin <link>`
+1. from local to remote: `git remote add origin <link>`; from remote to local: `git clone <link>`; detals `git remote -v`
 
 2. first push 
 	
@@ -76,3 +87,24 @@ Let's begin!
 	`git push origin master`
 
 		for later pushes
+
+### branching
+
+`git branch <branch name>`: list (without argument) and add new branch
+
+`git checkout`
+
+short command for branch and checkout: `git checkout -b <branch name>`
+
+`git merge <name>`: merge a branch to branch in use.
+
+`git branch -d <name>`: deleting a branch
+
+branching with conflicts: need to add later
+
+branching strategy: master-dev-bugs & features
+
+### tagging
+
+`git tag <tag-name>`
+
