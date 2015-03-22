@@ -19,19 +19,19 @@
 
 Let's begin!
 
-### at terminal
+### Local
 
-0. `git init`
+1. `git init`
 
 	in right folder first.
 
-1. `git add <file>`
+2. `git add <file>`
 	
 	we can use "*", etc.
 
 	eg. git add "*.md"
 
-2. `git commit`
+3. `git commit`
 
 	need some details
 
@@ -45,36 +45,52 @@ Let's begin!
 
 	[details](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000)
 
-3. `git status`
+4. `git status`
 
-4. `git diff`
+5. `git diff`
 
-5. `git log`
+6. `git log`
 
-6. on deleting 
+7. on deleting 
 
 	`git rm`
 
 	`git checkout` can be used for replacing files in working folder.
 
-6. On resetting
+8. On resetting
 
 	`git reset --hard commit_id`
 
 	HEAD: this version
-
 	HEAD^, HEAD^^, HEAD~100
 
 	>normal commit id: commit 31dc03905a9866775fe45ac8ae22382c685ce66e
 
 	`git log`
-
 	to get commit id.
 
 	`git reflog`
-
 	to get to a later version.
 
+ 9. branching
+
+	`git branch <branch name>`: list (without argument) and add new branch
+
+	`git checkout`
+
+	short command for branch and checkout: `git checkout -b <branch name>`
+
+	`git merge <name>`: merge a branch to branch in use.
+
+	`git branch -d <name>`: deleting a branch
+
+	branching with conflicts: need to add later
+
+	general branching strategy: master-dev-bugs & features
+
+10. tagging
+
+	`git tag <tag-name>`
 
 ### remote, push and pull
 
@@ -85,26 +101,7 @@ Let's begin!
 	`git push -u origin master`
 
 	`git push origin master`
-
 	for later pushes
 
-### branching
 
-`git branch <branch name>`: list (without argument) and add new branch
-
-`git checkout`
-
-short command for branch and checkout: `git checkout -b <branch name>`
-
-`git merge <name>`: merge a branch to branch in use.
-
-`git branch -d <name>`: deleting a branch
-
-branching with conflicts: need to add later
-
-branching strategy: master-dev-bugs & features
-
-### tagging
-
-`git tag <tag-name>`
 
