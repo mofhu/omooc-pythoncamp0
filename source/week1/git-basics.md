@@ -15,11 +15,16 @@ A portable version of basic commands (not by me): [Git cheet sheet](git-cheat-sh
 
 ## Objectives:
 
-* Minimal commands for git starter in terminal
+* Minimal commands for Git starter in command line interface
 
-* Enough commands for git in terminal
+* Enough commands for Git/GitHub
 
 Let's begin!
+
+## Main
+### Git and GitHub
+- Git 是一个分布式版本管理系统
+- Git & GitHub 高效解决了多人协作开发的问题,在开源圈的应用尤为成功,或许算是当前最主流高效的开发方式
 
 ### Local
 
@@ -39,7 +44,7 @@ Let's begin!
 
 	`git commit -m "the description of changes, will be shown in logs, so it's important"`
 
-	`git commit -am "description"`
+	`git commit -am (or -a -m) "description"`
 
 	commit all changes ONLY in files git has already managed. (i.e. not applied to files not added. so to apply all changes, using git add before git commit.)
 
@@ -53,9 +58,9 @@ Let's begin!
 
 6. `git log`
 
-7. on deleting 
+7. On deleting 
 
-	`git rm`
+	`git rm` deleting file do not deleting it in git.
 
 	`git checkout` can be used for replacing files in working folder.
 
@@ -74,7 +79,7 @@ Let's begin!
 	`git reflog`
 	to get to a later version.
 
- 9. branching
+ 9. Branching
 
 	`git branch <branch name>`: list (without argument) and add new branch
 
@@ -90,22 +95,25 @@ Let's begin!
 
 	general branching strategy: master-dev-bugs & features
 
-10. tagging
+10. Tagging
 
 	`git tag <tag-name>`
 
 ### Remote, push and pull
 
-1. from local to remote: `git remote add origin <link>`; from remote to local: `git clone <link>`; detals `git remote -v`
+1. From local to remote: `git remote add origin <link>`; from remote to local: `git clone <link>`; detals `git remote -v`
 
-2. first push 
-	`git push -u origin master`
+2. Push 
 
-	for later pushes `git push origin master`
+	first push: `git push -u origin master`
 
+	for later pushes: `git push origin master`
 
+### GitHub
+- Fork 
+- Push request
 
-#### References and Resources
+## References and Resources
 * [Git tutorial @ liaoxuefeng's blog](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 * [Git cheet sheet](http://www.git-tower.com/blog/assets/2013-05-22-git-cheat-sheet/cheat-sheet-large01.png)
 

@@ -12,8 +12,14 @@
 
 
 ## Main
+- Why Markdown?
 - Basics
 - More
+
+### Why Markdown for me?
+- 语法简单,学习容易
+- 轻量级语言,比原架构在 OneNote 的个人管理系统方便很多
+- 已广泛应用于开源社区
 
 ### Basics
 * 不同级别标题
