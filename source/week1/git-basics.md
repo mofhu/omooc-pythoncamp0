@@ -5,7 +5,7 @@
 * Set up: `git init`
 * Change and commit: `git add <file>`, `git commit -am "description"`
 * Find changes: `git status`, `git diff`, `git log`
-* Branch and tag: `git branch (branch)`, `git checkout`, `git branch -d <branch>`, `git tag <tag-name>`
+* Branch and tag: `git branch (branch)`, `git checkout`, `git merge <branch>`, `git branch -d <branch>`, `git tag <tag-name>`
 * Reset: `git reset --hard commit_id`
 * Remote: `git remote add origin <link>`, `git clone <link>`
 * Push and pull: `git push -u origin master`, `git push origin master`
