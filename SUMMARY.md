@@ -3,4 +3,6 @@
 * [缘起](/source/begin.md)
 * [Week 1](/source/week1/introduction.md)
   * [Git basics](/source/week1/git-basics.md)
+  * [Markdown basics](/source/week1/markdown-basics.md)
+* [编外编: Meta-programming](/source/meta-programming.md)
 * [结尾](./source/end.md)
