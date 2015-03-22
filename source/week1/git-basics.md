@@ -1,6 +1,6 @@
 # Git Basics
 
-## Quick Notes
+## Quick Reminders
 
 * Set up: `git init`
 * Change and commit: `git add <file>`, `git commit -am "description"`
@@ -9,6 +9,7 @@
 * Remote: `git remote add origin <link>`, `git clone <link>`
 * Push and pull: `git push -u origin master`, `git push origin master`
 * Branch and tag: `git branch (branch)`, `git checkout`, `git branch -d <branch>`, `git tag <tag-name>`
+* A portable version of basic commands: [Git cheet sheet](/git-cheat-sheet.png)
 
 
 ## Objectives:
@@ -92,16 +93,18 @@ Let's begin!
 
 	`git tag <tag-name>`
 
-### remote, push and pull
+### Remote, push and pull
 
 1. from local to remote: `git remote add origin <link>`; from remote to local: `git clone <link>`; detals `git remote -v`
 
 2. first push 
-	
 	`git push -u origin master`
 
-	`git push origin master`
-	for later pushes
+	for later pushes `git push origin master`
 
 
+
+#### References and Resources
+* [Git tutorial @ liaoxuefeng's blog](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+* [Git cheet sheet](http://www.git-tower.com/blog/assets/2013-05-22-git-cheat-sheet/cheat-sheet-large01.png)
 
