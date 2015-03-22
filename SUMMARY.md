@@ -1,6 +1,8 @@
 # SUMMARY
 
 * [缘起](/source/begin.md)
+* [Week 1](/source/week1/introduction)
+  * [Git basics](/source/git-basics.md)
 * [part1](./source/part1/introduction)
   * [part1.1](./source/part1/1.md)
 * [part2](./source/part2/introduction)
