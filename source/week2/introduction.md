@@ -28,9 +28,9 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 
 24:00 sleep
 
-3:16 失眠决定爬起来
+3:16 失眠决定爬起来(内心的呼唤?大脑的自动补完能力?)
 
-4:15 v0.1 finished
+4:15 v0.1 finished & pushed
 
 待完成:
 
@@ -40,3 +40,5 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 - i/o: output
 - i/o: optimization
 - other issue in task list
+
+4:23 sleep again 
