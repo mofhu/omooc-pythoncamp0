@@ -4,7 +4,7 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 
 ## 2.1 "Guess the number!"
 
-尝试一种特别的方案: 跳过一切其它内容, 直指任务, 看看能用多快速度完成?
+尝试一种特别的**超快速**方案: 跳过一切其它内容, 直指任务, 看看能用多快速度完成?
 
 其它内容以后慢慢补充即可
 
@@ -25,3 +25,18 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 构建整体框架(伪码和框图)
 
 	细分知识点
+
+24:00 sleep
+
+3:16 失眠决定爬起来
+
+4:15 v0.1 finished
+
+待完成:
+
+- i/o: robustness
+- limit of attempts
+- 0-1000 choices
+- i/o: output
+- i/o: optimization
+- other issue in task list
