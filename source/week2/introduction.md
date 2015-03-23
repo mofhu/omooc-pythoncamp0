@@ -42,3 +42,15 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 - other issue in task list
 
 4:23 sleep again 
+
+6:30 wake up again
+
+7:00 finished 0-1000
+
+	note: button 的语法写的有些晕,查阅后解决( button 的函数不能带参数)
+	
+7:55 finished issues `except i/o robustness`
+
+	enough for this task's first draft.
+	
+	push for v 1.0
