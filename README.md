@@ -13,6 +13,8 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
   * [Markdown basics](/source/week1/markdown-basics.md)
   * [Mailing-list](/source/week1/mailing-list.md)
   * [GitBook](/source/week1/gitbook.md)
+* [Week 2](/source/week2/introduction.md)
+  * [2.1 "Guess the number!"](/source/week2/guess-the-number.md)
 * [编外编: Meta-programming](/source/meta-programming.md)
 * [结尾](./source/end.md)
 
