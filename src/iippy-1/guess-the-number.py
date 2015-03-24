@@ -34,7 +34,7 @@ def enter(guess_input):
     global attempts
     global range
     guess = int(guess_input) # better robustness needed
-    print 'secret number', secret_number # only for debugging
+    # print 'secret number', secret_number # only for debugging
 
     attempts -=1
     print 'Guess number is', guess
