@@ -63,3 +63,10 @@
 
 - 8:08 总结完毕,发布后去搬砖(要迟到了)
 - 8:25 发布 GitBook 发现各种链接404了, 看来要解决一下, 目测装天才要失败 :)
+
+
+20150325
+
+- 23:52 
+  - GUI 输出 MVP finished (multiline output remains)
+  - robustness: NULL input solved; character input remains; float input remains
