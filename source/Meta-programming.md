@@ -19,14 +19,14 @@
 
 ## On Finishing Task, by 大妈
 - 依旧课程任务的发布,全力去作到:
-- 每个任务尽可能按时完成
-- 尽可能记录下来自己的学习探索过程:
+- **每个任务尽可能按时完成**
+- **尽可能记录下来自己的学习探索过程**:
   - 怎么设想的?
   - 怎么尝试的?
   - 怎么失败的?
   - 怎么搜索的?
   - `这个循环有必要用 Quick Reminder 放在案头备用`
-- 设定一个`警戒线`,一但超过,还是没有头绪,立即对外求助
+- **设定一个`警戒线`,一但超过,还是没有头绪,立即对外求助**
   - 向同组伙伴
   - 组长
   - 学员列表
@@ -35,3 +35,11 @@
   - 作业提交的形式/流程
   - 每天具体应该作什么的困惑
 - 都`及时,清晰,条理`的向`所有人`传达出来
+
+## 代码抽象三原则
+- Rule of three:
+  - 一个有效的实用手段?
+  - 避免过度抽象和抽象不足!
+
+- [阮一峰 blog](http://www.ruanyifeng.com/blog/2013/01/abstraction_principles.html)
+- [Derick Balley's original post](https://lostechies.com/derickbailey/2012/10/31/abstraction-the-rule-of-three/)
