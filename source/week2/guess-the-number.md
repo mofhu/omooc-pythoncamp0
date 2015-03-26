@@ -63,10 +63,17 @@
 
 - 8:08 总结完毕,发布后去搬砖(要迟到了)
 - 8:25 发布 GitBook 发现各种链接404了, 看来要解决一下, 目测装天才要失败 :)
-
+- 12:10 发布 v1.0
 
 20150325
 
 - 23:52 
   - GUI 输出 MVP finished (multiline output remains)
   - robustness: NULL input solved; character input remains; float input remains
+
+20150326
+
+- 需要再看语法基本知识
+- 如数据类型 全局变量等
+- `在实践中发现知识漏洞-再补充`也许是一个可行的 MVP 方案?
+  - 发现自己真正需要什么
