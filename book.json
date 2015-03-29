@@ -1,1 +1,9 @@
-{}
+
+{
+    "plugins": [
+        "disqus"
+    ],
+    "pluginsConfig": {
+        "shortName": "<FrankHu>"
+    }
+}
