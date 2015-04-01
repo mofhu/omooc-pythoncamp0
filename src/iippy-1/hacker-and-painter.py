@@ -3,6 +3,7 @@
 # V2.0, 20150331
 
 import simplegui
+import re
 
 # initalize globals
 # 3 lists for storing different parameters, using index to sync.
@@ -23,9 +24,9 @@ timer = 0
 def paint(canvas):
     # display color and shape in use
     canvas.draw_text('Color in use: %s' % (color_in_use), 
-    	             (20, 20), 14, 'Black') 
+                     (20, 20), 14, 'Black') 
     canvas.draw_text('Shape in use: %s' % (shape_in_use), 
-    	             (20, 40), 14, 'Black') 
+                     (20, 40), 14, 'Black') 
     canvas.draw_text('Play interval in use: %s' % (interval),
                      (20, 60), 14, 'Black') 
     i = 0
@@ -57,7 +58,13 @@ def click(mouse_click):
 def color_setter(color_input):
     global color_in_use
     # need to add robustness here in later version
-    color_in_use = color_input
+    # regular expression for robustness. Never be afraid of bad guys now, haha:) 
+    # return wrong in console
+    # the expression is found online. No time to learn it this week...
+    if re.match("\#:h", color_input, ): 
+        color_in_use = color_input
+    else:
+        print 'Wrong color input! Please input the right color format!'    
     #label_color.set_text('Color in use: %s') % (color_in_use)
 
 def shape_setter_circle():
@@ -112,7 +119,13 @@ def tick():
 
 def change_interval(interval_input):
     global interval
-    interval = int(interval_input)
+    # regular expression for robustness. Never be afraid of bad guys now, haha:) 
+    # return wrong in console
+    # the expression is found online. No time to learn it this week...
+    if re.match("^[0-9]*[1-9][0-9]*$", interval_input, ): 
+        interval = int(interval_input)
+    else:
+        print 'Wrong interval input! Please input a number!'
     print interval
 
 # create frame
