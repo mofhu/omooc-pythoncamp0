@@ -23,6 +23,6 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
      - 最基本的版本完成,可以画出很多个圆圈了.
      
 - while 死循环...
- - 类型不同的比较...i 被默认搞成了 str
+ - 类型不同的比较? i 似乎被默认搞成了 string?
  - 仍有问题,怀疑是 draw_handler 的毛病:似乎这个玩意一直在死循环
      - 经过测试果然如此! 其实并不是 while loop 的问题
