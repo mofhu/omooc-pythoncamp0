@@ -21,5 +21,5 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
       - Iteration and iteration
 
 
-- [3.1 "Hacker and Painter"](/hacker-and-painter.md)
+- [3.1 "Hacker and Painter"](hacker-and-painter.md)
 

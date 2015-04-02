@@ -16,6 +16,9 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
 * [Week 2](/source/week2/introduction.md)
   * [2.1 "Guess the number!"](/source/week2/guess-the-number.md)
   	* [源码](/src/iippy-1/guess-the-number.py)
+* [Week 3](/source/week3/introduction.md)
+  * [3.1 "Hacker and Painter"](/source/week3/hacker-and-painter.md)
+  	* [源码](/src/iippy-1/hacker-and-painter.py)
 * [编外编: Meta-programming](/source/meta-programming.md)
 * [结尾](./source/end.md)
 
