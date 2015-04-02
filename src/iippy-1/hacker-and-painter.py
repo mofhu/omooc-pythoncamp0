@@ -1,12 +1,14 @@
 # Author Frank Hu
 # Hacker and Painter
-# V2.0, 20150331
+# V3.0, 20150402
 
 import simplegui
 import re
 
 # initalize globals
 # 3 lists for storing different parameters, using index to sync.
+# need to use the same index[] when cross-talking in different lists
+# object-oriented skill maybe a good idea for more complicated work.
 WIDTH = 300
 HEIGHT = 600
 color_in_use = 'Black'
@@ -22,7 +24,8 @@ time = 0
 timer = 0
 
 def paint(canvas):
-    # display color and shape in use
+    # display color and shape in use, in canvas
+    # as it is not supported to print on label
     canvas.draw_text('Color in use: %s' % (color_in_use), 
                      (20, 20), 14, 'Black') 
     canvas.draw_text('Shape in use: %s' % (shape_in_use), 
@@ -34,19 +37,17 @@ def paint(canvas):
         if shape_list[i] == 'Circle': # first use "=" instead, a "classic" error
             canvas.draw_circle(pos_list[i], 20, 2, color_list[i])
         elif shape_list[i] == 'Triangle':
-            canvas.draw_polygon([(pos_list[i][0],pos_list[i][1] + 20), # ~5*squrt(2)
+            canvas.draw_polygon([(pos_list[i][0],pos_list[i][1] + 20),
                                 (pos_list[i][0] + 10,pos_list[i][1] - 10),
                                 (pos_list[i][0] - 10,pos_list[i][1] - 10)],
                                 2, color_list[i])
         else: #i.e.: shape_list == "square" 
-            canvas.draw_polygon([(pos_list[i][0] - 15,pos_list[i][1] + 15), # ~5*squrt(2)
+            canvas.draw_polygon([(pos_list[i][0] - 15,pos_list[i][1] + 15),
                                 (pos_list[i][0] + 15,pos_list[i][1] + 15),
                                 (pos_list[i][0] + 15,pos_list[i][1] - 15),
                                 (pos_list[i][0] - 15,pos_list[i][1] - 15)],
                                 2, color_list[i])
         i += 1
-    #    print i, len(pos_list), len(color_list)
-    # need to use the same index[] when cross-talking in different lists
 
 def click(mouse_click):
     global pos_list
@@ -57,30 +58,38 @@ def click(mouse_click):
     
 def color_setter(color_input):
     global color_in_use
-    # need to add robustness here in later version
     # regular expression for robustness. Never be afraid of bad guys now, haha:) 
     # return wrong in console
     # the expression is found online. No time to learn it this week...
-    if re.match("\#:h", color_input, ): 
+    valid_color_list = ['aqua', 'black', 'blue', 'fuchsia', 'gray',\
+                'green', 'lime', 'maroon', 'navy', 'olive', 'orange',\
+                'purple', 'red', 'silver', 'teal', 'white', 'yellow']
+    # match rgb #xxx format
+    if re.match("^#[0-9a-fA-F]{3}$", color_input, ): 
         color_in_use = color_input
+    # match reb #xxxxxx format
+    elif re.match("^#[0-9a-fA-F]{6}$", color_input, ): 
+    	color_in_use = color_input
     else:
+    	# match color list
+    	for i in valid_color_list:
+    		if color_input.lower() == i:
+    			color_in_use = i
+    			return
+    	# wrong input
         print 'Wrong color input! Please input the right color format!'    
-    #label_color.set_text('Color in use: %s') % (color_in_use)
 
 def shape_setter_circle():
     global shape_in_use
     shape_in_use = 'Circle'
-    #label_shape.set_text('Shape in use: %s')%(shape_in_use)
 
 def shape_setter_triangle():
     global shape_in_use
     shape_in_use = 'Triangle'
-    #label_shape.set_text('Shape in use: %s')%(shape_in_use)
 
 def shape_setter_square():
     global shape_in_use
     shape_in_use = 'Square'
-    #label_shape.set_text('Shape in use: %s')%(shape_in_use)
 
 def play():
     # 1: process lists to temp place
@@ -139,8 +148,10 @@ frame.set_mouseclick_handler(click) # get click position
 # rewrite it in a label...
 frame.add_input('Color: valid input is aqua, black, blue, fuchsia, gray,\
                 green, lime, maroon, navy, olive, orange, purple, red,\
-                silver, teal, white, yellow. And rgb format #xxx or #xxxxxx,\
-                bad input information is shown in canvas', color_setter, 100) 
+                silver, teal, white, yellow. \nAnd rgb format #xxx or \
+                #xxxxxx (x=0-9A-F),\n \
+                Bad input information is shown in console',
+                color_setter, 100) 
 # 3 buttoms for setting shape
 frame.add_button('Circle', shape_setter_circle, 100) 
 frame.add_button('Square', shape_setter_square, 100)
@@ -148,7 +159,6 @@ frame.add_button('Triangle', shape_setter_triangle, 100)
 # button to play whole progress
 frame.add_button('Play', play, 100)
 frame.add_input('Play interval', change_interval, 100)
-
 
 #start frame
 frame.start()
