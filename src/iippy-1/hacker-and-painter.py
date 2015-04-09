@@ -3,7 +3,7 @@
 # V4.1, 20150402
 # finishing for codeskulptor
 
-import simplegui
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
 
 # initalize globals
