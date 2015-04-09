@@ -11,9 +11,12 @@ import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 def new_game_setter(max):
     global secret_number
     global attempts
-    global message 
+    global message_list
+    # init the message list
+    message_list = []
     #global gametype
     secret_number = random.randrange(1, int(max))
+    print secret_number
     attempts = int(math.ceil(math.log(max, 2)))
     if max:
         print 'New game begins! Range is [0, %d).'%(int(max))
@@ -23,12 +26,13 @@ def new_game_setter(max):
     
 #inialize global before first enter
 new_game_setter(100)
-message = 'New game begins!'
-range = 100
+message_list = []
+range = 100 # should change to another name, as range is a built-in function
     
 #feedback message
 def show_message(canvas):
-    canvas.draw_text('%s'%(message), [0,40], 20, "Red")
+    for i in message_list:
+        canvas.draw_text('%s'%(i), [0,40 + 20 * message_list.index(i)], 20, "Red")
     
 def new_game():
     new_game_setter(range)
@@ -51,34 +55,28 @@ def enter(guess_input):
     if guess_input: # to see if the imput is NULL
         guess = int(guess_input) 
     else: 
-        print 'No input, please input a number between 0 and %d!'%(range)
-        message = 'No input, please input a number between 0 and %d!'%(range)
+        message_list.append('No input, please input a number between 0 and %d!'%(range))
         return
     # print 'secret number', secret_number # only for debugging
 
-    attempts -=1
+    attempts -= 1
     print 'Guess number is', guess
     if secret_number == guess:
-        print 'Correct!'
-        message = 'Correct!'
+        message_list.append('Correct!')
         new_game()
     elif secret_number > guess:
-        print 'Lower!'
-        print 'Ramaining attempts is', attempts
-        message = 'Lower! Ramaining attempts is %d'%(attempts)
+        message_list.append('Lower! Ramaining attempts is %d'%(attempts))
     else:
-        print 'Higher!'     
-        print 'Ramaining attempts is', attempts
-        message = 'Higher! Ramaining attempts is %d'%(attempts)
+        message_list.append('Higher! Ramaining attempts is %d'%(attempts))
     if attempts == 0:
-        print 'Game over! The secret number is', secret_number, 'better luck next time:)'
-        message = 'Game over! The secret number is %d better luck next time:)'%(attempts)
+        message_list.append('Game over! The secret number is %d \
+            better luck next time:)'%(attempts))
         new_game()
 
 # AI guess function: input is low and high limit, output guess number
 # Guess using 1/2 method: it's best method. But I can only explain, but not prove
 def AI_guess(low_limit, high_limit):
-    return low_limit + 0.5 * (high_limit - low_limit) 
+    return int(low_limit + 0.5 * (high_limit - low_limit)) 
 
 # another function need for i/o with the game
 # in later versions, 
