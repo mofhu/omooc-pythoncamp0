@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V0.2, 20150416
+# V0.9, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
 
 # initalize globals
-# 3 lists for storing different parameters, using index to sync.
-# need to use the same index[] when cross-talking in different lists
-# object-oriented skill maybe a good idea for more complicated work.
 WIDTH = 600
 HEIGHT = 600
 color_in_use = 'Black'
@@ -42,18 +39,6 @@ class Pixel:
         self.color = color
         self.position = position
 
-'''def init_canvas():
-    # init pixels on canvas
-    global pixel_list
-    i = 0
-    while i < WIDTH:
-        j = 0
-        while j < HEIGHT:
-            new_pixel = Pixel('Red', [i,j])
-            pixel_list.append(new_pixel)
-            j += 1
-        i += 1'''
-
 def draw_pixel(drawing):
     # draw by append every pixel in the single drawing to pixel list
     global pixel_list
@@ -70,10 +55,40 @@ def watercolor(new_pixel, pixel_list):
     for i in pixel_list:
         if i.position == new_pixel.position: 
         # i.e. there are something in the new pixel, need to merge color
-            i.color = new_pixel.color # first version of merging, not using watercolor algorithm
-            # i.color = 'red' # just for testing
+        # first converse RGB to CMYK;
+        # then merge CMYK;
+        # final transfer back to RGB;
+        # i.color = (r, g, b). i.e. a tuple with 3 elements 
+            if i.color == 'red': #debug
+                i.color = (255,255,0)
+            if new_pixel.color == 'blue':
+                new_pixel.color = (0,255,255) #debug finish
+            i.color = CMYK_to_RGB(merge_CMYK(RGB_to_CMYK(i.color), 
+                                             RGB_to_CMYK(new_pixel.color)))
+            # i.color = 'green' # just for testing
             return
     pixel_list.append(new_pixel)
+
+def RGB_to_CMYK(color_RGB):
+    print color_RGB # debug
+    color_R = color_RGB[0] / 255
+    color_G = color_RGB[1] / 255
+    color_B = color_RGB[2] / 255
+    color_K = 1 - max(color_R, color_G, color_B)
+    return [(1 - color_R - color_K) / (1 - color_K), 
+            (1 - color_G - color_K) / (1 - color_K), 
+            (1 - color_B - color_K) / (1 - color_K),
+            color_K]
+
+def merge_CMYK(color_1, color_2):
+    return [max(color_1[0], color_2[0]), max(color_1[1], color_2[1]),
+            max(color_1[2], color_2[2]), max(color_1[3], color_2[3])]
+
+def CMYK_to_RGB(color_CMYK):
+    # R = 255(1-C)(1-K); G = 255(1-M)(1-K); B = 255(1-Y)(1-K)
+    return [255 * (1 - color_CMYK[0]) * (1 - color_CMYK[3]),
+            255 * (1 - color_CMYK[1]) * (1 - color_CMYK[3]),
+            255 * (1 - color_CMYK[2]) * (1 - color_CMYK[3])]
 
 def paint(canvas): 
     # main print function
@@ -121,7 +136,8 @@ def color_setter(color_input): # input color
     # regular expression for robustness. Never be afraid of bad guys now, haha:) 
     # return wrong in console
     # the expression is found online. No time to learn it this week...
-    valid_color_list = ['aqua', 'black', 'blue', 'fuchsia', 'gray',\
+    color_in_use = color_input
+    '''valid_color_list = ['aqua', 'black', 'blue', 'fuchsia', 'gray',\
                 'green', 'lime', 'maroon', 'navy', 'olive', 'orange',\
                 'purple', 'red', 'silver', 'teal', 'white', 'yellow']
     # match rgb #xxx format
@@ -137,7 +153,7 @@ def color_setter(color_input): # input color
     			color_in_use = i
     			return
     	# wrong input
-        print 'Wrong color input! Please input the right color format!'    
+        print 'Wrong color input! Please input the right color format!'  '''  
 
 # set shapes
 def shape_setter_circle():
