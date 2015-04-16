@@ -31,36 +31,16 @@ class Drawing:
         self.position = position
         self.shape = shape
         self.size = size
-        # draw the pixels
-        global pixel_list
-        i = 0
-        while i < size:
-            j = 0
-            while j < size:
-                new_pixel = Pixel(color, [position[0] + i, position[1] + j])
-                pixel_list.append(new_pixel)
-                j += 1
-            i += 1
 
     def __str__(self): # print for debugging
         return self.color, self.position, self.shape, self.size
-
 
 class Pixel:
     # class for a single pixel, storing its color and position
     # may be defined as a single pixel Drawing.
     def __init__(self, color, position):
-        # the RGB-CMYK-RGB algorithm for watercolor painting
-        global pixel_list
-        is_an_color = False
-        for i in pixel_list:
-            if (i.position[0] == position[0]) and (i.position[1] == position[1]):
-                is_an_color = True
-        if is_an_color == True:
-            pass
-        else:
-            self.color = color
-            self.position = position
+        self.color = color
+        self.position = position
 
 '''def init_canvas():
     # init pixels on canvas
@@ -73,6 +53,27 @@ class Pixel:
             pixel_list.append(new_pixel)
             j += 1
         i += 1'''
+
+def draw_pixel(drawing):
+    # draw by append every pixel in the single drawing to pixel list
+    global pixel_list
+    i = 0
+    while i < drawing.size:
+        j = 0
+        while j < drawing.size:
+            new_pixel = Pixel(drawing.color, [drawing.position[0] + i, drawing.position[1] + j])
+            watercolor(new_pixel, pixel_list)
+            j += 1
+        i += 1
+
+def watercolor(new_pixel, pixel_list):
+    for i in pixel_list:
+        if i.position == new_pixel.position: 
+        # i.e. there are something in the new pixel, need to merge color
+            i.color = new_pixel.color # first version of merging, not using watercolor algorithm
+            # i.color = 'red' # just for testing
+            return
+    pixel_list.append(new_pixel)
 
 def paint(canvas): 
     # main print function
@@ -108,12 +109,12 @@ def paint(canvas):
     canvas.draw_text('Play interval in use: %s' % (interval),
                      (20, 60), 14, 'Black') 
 
-
 def append_drawing(mouse_click): # catch mouse click when not playing
     if UI_protect == False: #i.e. not protecting
         print mouse_click, color_in_use, shape_in_use, size_in_use
         single_drawing = Drawing(color_in_use, mouse_click, shape_in_use, size_in_use)
         drawing_list.append(single_drawing)
+        draw_pixel(single_drawing)
     
 def color_setter(color_input): # input color
     global color_in_use
