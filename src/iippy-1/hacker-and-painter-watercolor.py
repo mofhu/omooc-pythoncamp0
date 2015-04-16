@@ -1,6 +1,6 @@
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V0.1, 20150416
+# V0.2, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
@@ -13,24 +13,41 @@ WIDTH = 600
 HEIGHT = 600
 color_in_use = 'Black'
 shape_in_use = 'Circle'
-shape_list = []
-color_list = []
-pos_list = []
-temp_shape_list = shape_list
-temp_color_list = color_list
-temp_pos_list = pos_list
-interval = 200
+size_in_use = 10
+drawing_list = []
+temp_drawing_list = []
+interval = 400
 time = 0 # for count ticking
 timer = 0 
 UI_protect = False 
 
+class Drawing:
+    # class for a single draw action
+    # note: type of painter maybe added in later version.
+    def __init__(self, color, position, shape, size):
+        self.color = color
+        self.position = position
+        self.shape = shape
+        self.size = size
+    def __str__(self): # print for debugging
+        return self.color, self.position, self.shape, self.size
+
+class Pixel:
+    # class for a single pixel, storing its color and position
+    # may be defined as a single pixel Drawing.
+    def __init__(self, color, position):
+        self.color = color
+        self.position = position
+
 def paint(canvas): # main print function
     # display color and shape in use, in canvas
     # as it is not supported to print on label
-    i = 0
+    for i in drawing_list:
+        canvas.draw_circle(i.position, i.size, 1, i.color, i.color)
+    '''i = 0
     while i < len(pos_list):
         if shape_list[i] == 'Circle': # first use "=" instead, a "classic" error
-            canvas.draw_circle(pos_list[i], 20, 2, color_list[i])
+            canvas.draw_circle(pos_list[i], 20, 2, color_list[i], color_list[i])
         elif shape_list[i] == 'Triangle':
             canvas.draw_polygon([(pos_list[i][0],pos_list[i][1] + 20),
                                 (pos_list[i][0] + 10,pos_list[i][1] - 10),
@@ -42,7 +59,7 @@ def paint(canvas): # main print function
                                 (pos_list[i][0] + 15,pos_list[i][1] - 15),
                                 (pos_list[i][0] - 15,pos_list[i][1] - 15)],
                                 2, color_list[i])
-        i += 1
+        i += 1'''
     # protect from input when playing
     if UI_protect == True:
     	    canvas.draw_text('Playing, not able to draw now.',
@@ -56,13 +73,11 @@ def paint(canvas): # main print function
                      (20, 60), 14, 'Black') 
 
 
-def click(mouse_click): # catch mouse click when not playing
-    global pos_list
+def append_drawing(mouse_click): # catch mouse click when not playing
     if UI_protect == False: #i.e. not protecting
-        print mouse_click, color_in_use, shape_in_use
-        pos_list.append(mouse_click)
-        color_list.append(color_in_use)
-        shape_list.append(shape_in_use)
+        print mouse_click, color_in_use, shape_in_use, size_in_use
+        single_drawing = Drawing(color_in_use, mouse_click, shape_in_use, size_in_use)
+        drawing_list.append(single_drawing)
     
 def color_setter(color_input): # input color
     global color_in_use
@@ -102,21 +117,13 @@ def shape_setter_square():
 
 def play():
     # 1: process lists to temp place
-    global temp_shape_list
-    global temp_color_list 
-    global temp_pos_list 
-    global shape_list
-    global color_list
-    global pos_list
+    global drawing_list
+    global temp_drawing_list
     global timer
     global UI_protect
-    temp_shape_list = shape_list
-    temp_color_list = color_list
-    temp_pos_list = pos_list
+    temp_drawing_list = drawing_list
     # 2: clear list
-    shape_list = []
-    color_list = []
-    pos_list = []
+    drawing_list = []
     # 3: remake list with delay
     print interval
     timer = simplegui.create_timer(interval, tick)
@@ -129,12 +136,10 @@ def tick():
     global time 
     global timer
     global UI_protect
-    if time < len(temp_pos_list):
-        shape_list.append(temp_shape_list[time])
-        color_list.append(temp_color_list[time])
-        pos_list.append(temp_pos_list[time])
+    if time < len(temp_drawing_list):
+        drawing_list.append(temp_drawing_list[time])
         time += 1
-        print time        
+        print time
     else:
         timer.stop()
         UI_protect = False
@@ -157,7 +162,7 @@ frame.set_canvas_background('White')
 frame.set_draw_handler(paint)
 
 # set event handler
-frame.set_mouseclick_handler(click) # get click position
+frame.set_mouseclick_handler(append_drawing) # get click position
 # use a input box to get color
 # rewrite it in a label...
 frame.add_input('Color: valid input is aqua, black, blue, fuchsia, gray,\
