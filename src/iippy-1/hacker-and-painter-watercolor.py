@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
 # V0.2, 20150416
@@ -13,9 +14,10 @@ WIDTH = 600
 HEIGHT = 600
 color_in_use = 'Black'
 shape_in_use = 'Circle'
-size_in_use = 10
+size_in_use = 20
 drawing_list = []
 temp_drawing_list = []
+pixel_list = []
 interval = 400
 time = 0 # for count ticking
 timer = 0 
@@ -29,21 +31,55 @@ class Drawing:
         self.position = position
         self.shape = shape
         self.size = size
+        # draw the pixels
+        global pixel_list
+        i = 0
+        while i < size:
+            j = 0
+            while j < size:
+                new_pixel = Pixel(color, [position[0] + i, position[1] + j])
+                pixel_list.append(new_pixel)
+                j += 1
+            i += 1
+
     def __str__(self): # print for debugging
         return self.color, self.position, self.shape, self.size
+
 
 class Pixel:
     # class for a single pixel, storing its color and position
     # may be defined as a single pixel Drawing.
     def __init__(self, color, position):
-        self.color = color
-        self.position = position
+        # the RGB-CMYK-RGB algorithm for watercolor painting
+        global pixel_list
+        is_an_color = False
+        for i in pixel_list:
+            if (i.position[0] == position[0]) and (i.position[1] == position[1]):
+                is_an_color = True
+        if is_an_color == True:
+            pass
+        else:
+            self.color = color
+            self.position = position
 
-def paint(canvas): # main print function
+'''def init_canvas():
+    # init pixels on canvas
+    global pixel_list
+    i = 0
+    while i < WIDTH:
+        j = 0
+        while j < HEIGHT:
+            new_pixel = Pixel('Red', [i,j])
+            pixel_list.append(new_pixel)
+            j += 1
+        i += 1'''
+
+def paint(canvas): 
+    # main print function
     # display color and shape in use, in canvas
     # as it is not supported to print on label
-    for i in drawing_list:
-        canvas.draw_circle(i.position, i.size, 1, i.color, i.color)
+    for i in pixel_list:
+        canvas.draw_point(i.position, i.color)
     '''i = 0
     while i < len(pos_list):
         if shape_list[i] == 'Circle': # first use "=" instead, a "classic" error
