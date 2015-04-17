@@ -10,16 +10,16 @@
 
 ![Figure1](IMG_1987.jpg)
 
-![Figure2](IMG_1988.jpg)
+![Figure2](IMG_1988.JPG)
 
-![Figure3](IMG_1989.jpg)
+![Figure3](IMG_1989.JPG)
 
-![Figure4](IMG_1990.jpg)
+![Figure4](IMG_1990.JPG)
 
-![Figure5](IMG_1991.jpg)
+![Figure5](IMG_1991.JPG)
 
-![Figure6](IMG_1992.jpg)
+![Figure6](IMG_1992.JPG)
 
-![Figure7](IMG_1993.jpg)
+![Figure7](IMG_1993.JPG)
 
 
