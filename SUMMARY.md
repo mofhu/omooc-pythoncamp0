@@ -16,5 +16,6 @@
   	* [源码](/src/iippy-1/hacker-and-painter.py)
 * [Week 4](/source/week4/introduction.md)
 * [Week 5](/source/week5/introduction-week5.md)
+  * [5.1 "Hacker and Painter", watercolor version](/source/week5/hacker-and-painter-watercolor.md)
 * [编外编: Meta-programming](/source/meta-programming.md)
 * [结尾](/source/end.md)

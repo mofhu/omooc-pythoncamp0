@@ -1,9 +1,9 @@
-  
-  
-20150416 23:30
+#Hacker and painter, watercolor version
 
-  log of rgb type error 
-  
-  File "hacker-and-painter-watercolor.py", line 70, in RGB_to_CMYK
-    color_R = color_RGB[0] / 255
-TypeError: unsupported operand type(s) for /: 'str' and 'int'
+![Alt text](IMG_1987.jpg)
+![Alt text](IMG_1988.jpg)
+![Alt text](IMG_1989.jpg)
+![Alt text](IMG_1990.jpg)
+![Alt text](IMG_1991.jpg)
+![Alt text](IMG_1992.jpg)
+![Alt text](IMG_1993.jpg)
