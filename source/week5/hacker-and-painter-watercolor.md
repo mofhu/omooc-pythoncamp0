@@ -9,11 +9,17 @@
 [CMYK to RGB algorithm](http://www.rapidtables.com/convert/color/cmyk-to-rgb.htm)
 
 ![Figure1](IMG_1987.jpg)
+
 ![Figure2](IMG_1988.jpg)
+
 ![Figure3](IMG_1989.jpg)
+
 ![Figure4](IMG_1990.jpg)
+
 ![Figure5](IMG_1991.jpg)
+
 ![Figure6](IMG_1992.jpg)
+
 ![Figure7](IMG_1993.jpg)
 
 
