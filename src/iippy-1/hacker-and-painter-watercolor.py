@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V1.0, 20150416
+# V1.1, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
 
 # initalize globals
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 300
+HEIGHT = 300
+SIZE = 10
 color_in_use = 'Black'
 shape_in_use = 'Circle'
-size_in_use = 10
+size_in_use = SIZE
 drawing_list = []
 temp_drawing_list = []
 pixel_list = []
-interval = 1000
+interval = 2000
 time = 0 # for count ticking
 timer = 0 
 UI_protect = False 
@@ -42,12 +43,13 @@ class Pixel:
 def draw_pixel(drawing):
     # draw by append every pixel in the single drawing to pixel list
     global pixel_list
-    i = 0
+    i = 0 - drawing.size
     while i < drawing.size:
-        j = 0
+        j = 0 - drawing.size
         while j < drawing.size:
-            new_pixel = Pixel(drawing.color, [drawing.position[0] + i, drawing.position[1] + j])
-            watercolor(new_pixel, pixel_list)
+            if i * i + j * j < drawing.size * drawing.size:
+                new_pixel = Pixel(drawing.color, [drawing.position[0] + i, drawing.position[1] + j])
+                watercolor(new_pixel, pixel_list)
             j += 1
         i += 1
 
@@ -222,11 +224,7 @@ frame.set_draw_handler(paint)
 frame.set_mouseclick_handler(append_drawing) # get click position
 # use a input box to get color
 # rewrite it in a label...
-frame.add_input('Color: valid input is aqua, black, blue, fuchsia, gray,\
-                green, lime, maroon, navy, olive, orange, purple, red,\
-                silver, teal, white, yellow. \nAnd rgb format #xxx or \
-                #xxxxxx (x=0-9A-F),\n \
-                Bad input information is shown in console.',
+frame.add_input('Color: valid input is r,g,b. e.g.: 255,255,0 ',
                 color_setter, 150) 
 # 3 buttoms for setting shape
 frame.add_button('Circle', shape_setter_circle, 150) 
