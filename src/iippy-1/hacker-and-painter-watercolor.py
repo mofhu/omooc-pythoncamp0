@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V0.9, 20150416
+# V1.0, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
@@ -11,11 +11,11 @@ WIDTH = 600
 HEIGHT = 600
 color_in_use = 'Black'
 shape_in_use = 'Circle'
-size_in_use = 20
+size_in_use = 10
 drawing_list = []
 temp_drawing_list = []
 pixel_list = []
-interval = 400
+interval = 1000
 time = 0 # for count ticking
 timer = 0 
 UI_protect = False 
@@ -59,36 +59,44 @@ def watercolor(new_pixel, pixel_list):
         # then merge CMYK;
         # final transfer back to RGB;
         # i.color = (r, g, b). i.e. a tuple with 3 elements 
-            if i.color == 'red': #debug
-                i.color = (255,255,0)
-            if new_pixel.color == 'blue':
-                new_pixel.color = (0,255,255) #debug finish
             i.color = CMYK_to_RGB(merge_CMYK(RGB_to_CMYK(i.color), 
                                              RGB_to_CMYK(new_pixel.color)))
             # i.color = 'green' # just for testing
             return
     pixel_list.append(new_pixel)
 
+'''def HEX_to_RGB(color_HEX):
+
+def RGB_to_HEX(color_RGB):
+    # change into hex number
+    return '#'color_RGB[0]color_RGB[1]color_RGB[2]'''
+
 def RGB_to_CMYK(color_RGB):
-    print color_RGB # debug
-    color_R = color_RGB[0] / 255
-    color_G = color_RGB[1] / 255
-    color_B = color_RGB[2] / 255
+    # the format is 'rgb(r,g,b)', cut rgb(), then translate into a int tuple
+    color_RGB_cut = color_RGB.strip('rgb()')
+    color_RGB_tuple = color_RGB_cut.split(',')
+    color_R = float(int(color_RGB_tuple[0]) / 255)
+    color_G = float(int(color_RGB_tuple[1]) / 255)
+    color_B = float(int(color_RGB_tuple[2]) / 255)
     color_K = 1 - max(color_R, color_G, color_B)
-    return [(1 - color_R - color_K) / (1 - color_K), 
-            (1 - color_G - color_K) / (1 - color_K), 
-            (1 - color_B - color_K) / (1 - color_K),
-            color_K]
+    if color_K == 1:
+        return (0, 0, 0, 1)
+    else:
+        return ((1 - color_R - color_K) / (1 - color_K), 
+                (1 - color_G - color_K) / (1 - color_K), 
+                (1 - color_B - color_K) / (1 - color_K),
+                color_K)
 
 def merge_CMYK(color_1, color_2):
-    return [max(color_1[0], color_2[0]), max(color_1[1], color_2[1]),
-            max(color_1[2], color_2[2]), max(color_1[3], color_2[3])]
+    return (max(color_1[0], color_2[0]), max(color_1[1], color_2[1]),
+            max(color_1[2], color_2[2]), max(color_1[3], color_2[3]))
 
 def CMYK_to_RGB(color_CMYK):
     # R = 255(1-C)(1-K); G = 255(1-M)(1-K); B = 255(1-Y)(1-K)
-    return [255 * (1 - color_CMYK[0]) * (1 - color_CMYK[3]),
-            255 * (1 - color_CMYK[1]) * (1 - color_CMYK[3]),
-            255 * (1 - color_CMYK[2]) * (1 - color_CMYK[3])]
+    color_R = int((255 * (1 - color_CMYK[0]) * (1 - color_CMYK[3])))
+    color_G = int((255 * (1 - color_CMYK[1]) * (1 - color_CMYK[3])))
+    color_B = int((255 * (1 - color_CMYK[2]) * (1 - color_CMYK[3])))
+    return 'rgb' + str((color_R, color_G, color_B))
 
 def paint(canvas): 
     # main print function
@@ -136,7 +144,7 @@ def color_setter(color_input): # input color
     # regular expression for robustness. Never be afraid of bad guys now, haha:) 
     # return wrong in console
     # the expression is found online. No time to learn it this week...
-    color_in_use = color_input
+    color_in_use = 'rgb(' + str(color_input) + ')'
     '''valid_color_list = ['aqua', 'black', 'blue', 'fuchsia', 'gray',\
                 'green', 'lime', 'maroon', 'navy', 'olive', 'orange',\
                 'purple', 'red', 'silver', 'teal', 'white', 'yellow']
@@ -160,22 +168,16 @@ def shape_setter_circle():
     global shape_in_use
     shape_in_use = 'Circle'
 
-def shape_setter_triangle():
-    global shape_in_use
-    shape_in_use = 'Triangle'
-
-def shape_setter_square():
-    global shape_in_use
-    shape_in_use = 'Square'
-
 def play():
     # 1: process lists to temp place
     global drawing_list
+    global pixel_list
     global temp_drawing_list
     global timer
     global UI_protect
     temp_drawing_list = drawing_list
     # 2: clear list
+    pixel_list = []
     drawing_list = []
     # 3: remake list with delay
     print interval
@@ -186,11 +188,13 @@ def play():
 def tick():
     # playing with interval, as canvas is always drawing
     # appending new steps with interval to play
+    global drawing_list
     global time 
     global timer
     global UI_protect
     if time < len(temp_drawing_list):
         drawing_list.append(temp_drawing_list[time])
+        draw_pixel(temp_drawing_list[time])
         time += 1
         print time
     else:
@@ -226,8 +230,6 @@ frame.add_input('Color: valid input is aqua, black, blue, fuchsia, gray,\
                 color_setter, 150) 
 # 3 buttoms for setting shape
 frame.add_button('Circle', shape_setter_circle, 150) 
-frame.add_button('Square', shape_setter_square, 150)
-frame.add_button('Triangle', shape_setter_triangle, 150)
 # button to play whole progress
 frame.add_button('Play', play, 150)
 frame.add_input('Play interval', change_interval, 150)
