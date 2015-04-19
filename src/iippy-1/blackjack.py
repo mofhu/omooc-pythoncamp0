@@ -1,30 +1,32 @@
+# -*- coding: utf-8 -*-
+# Author Frank Hu
 # Mini-project #6 - Blackjack
+# v1.0 20150419
 
-import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+import simplegui
 import random
 
 # load card sprite - 936x384 - source: jfitz.com
 CARD_SIZE = (72, 96)
 CARD_CENTER = (36, 48)
 card_images = simplegui.load_image("http://storage.googleapis.com/codeskulptor-assets/cards_jfitz.png")
-
 CARD_BACK_SIZE = (72, 96)
 CARD_BACK_CENTER = (36, 48)
 card_back = simplegui.load_image("http://storage.googleapis.com/codeskulptor-assets/card_jfitz_back.png")    
 
 # initialize some useful global variables
 in_play = False
-outcome = "test"
+outcome = 'Hit or stand?'
 score = 0
+player_wins = 0
+dealer_wins = 0
 
 # define globals for cards
 SUITS = ('C', 'S', 'H', 'D')
 RANKS = ('A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K')
 VALUES = {'A':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':10, 'Q':10, 'K':10}
 
-
 # define card class
-
 class Card:
     def __init__(self, suit, rank):
         if (suit in SUITS) and (rank in RANKS):
@@ -50,7 +52,6 @@ class Card:
 class Hand:
     def __init__(self):
         self.list = []
-        return self
 
     def __str__(self):
         str_list = ''
@@ -105,58 +106,78 @@ class Deck:
         for i in self.cardlist:
             str_list += i.suit + i.rank + ' '
         return 'Deck contains ' + str_list
-        pass	# return a string representing the deck
+        pass    # return a string representing the deck
 
+# init hand and deck
 player_hand = Hand()
 dealer_hand = Hand()
 deck = Deck()    
 
 #define event handlers for buttons
 def deal():
-    global outcome, in_play, player_hand, dealer_hand, deck 
-    
-    # your code goes here
-    deck.shuffle()
-    player_hand = Hand()
-    dealer_hand = Hand()
-    player_hand.add_card(deck.deal_card())
-    dealer_hand.add_card(deck.deal_card())
-    player_hand.add_card(deck.deal_card())
-    dealer_hand.add_card(deck.deal_card())
-    print 'plarer: ', player_hand
-    print 'dealer: ', dealer_hand
-    in_play = True
+    global outcome, in_play, player_hand, dealer_hand, deck, dealer_wins
+    # in play deal means abandon game by player.
+    if in_play:
+        outcome = 'Player abandon game, dealer wins.'
+        dealer_wins += 1
+        in_play = False
+    else:
+        deck.shuffle()
+        player_hand = Hand()
+        dealer_hand = Hand()
+        player_hand.add_card(deck.deal_card())
+        dealer_hand.add_card(deck.deal_card())
+        player_hand.add_card(deck.deal_card())
+        dealer_hand.add_card(deck.deal_card())
+        in_play = True
 
 def hit():
     # if the hand is in play, hit the player
+    global outcome, in_play, dealer_wins
     if in_play:
-        player_hand.add_card(deck.deal_card())
-        print 'plarer: ', player_hand
-    if player_hand.get_value() > 21:
-        print 'Player busted. Dealer wins', player_hand.get_value()   
+        if player_hand.get_value() <= 21:
+            player_hand.add_card(deck.deal_card())
+            outcome = 'Hit or stand?'
+            if player_hand.get_value() > 21:              
+                dealer_wins += 1
+                in_play = False
+                outcome = 'You busted. New deal?'
     # if busted, assign a message to outcome, update in_play and score
        
 def stand():
     # if hand is in play, repeatedly hit dealer until his hand has value 17 or more
+    global outcome, in_play, player_wins, dealer_wins
     if in_play:
         while dealer_hand.get_value() < 17:
             dealer_hand.add_card(deck.deal_card())
+        in_play = False
         if (dealer_hand.get_value() < player_hand.get_value()) or (dealer_hand.get_value() > 21) :
-            print 'Player wins'
+            player_wins += 1
+            outcome = 'Player wins. New deal?'
         else:
-            print 'Dealer wins'
+            dealer_wins += 1
+            outcome = 'Dealer wins. New deal?'
+    
     # assign a message to outcome, update in_play and score
 
 # draw handler    
 def draw(canvas):
     # test to make sure that card.draw works, replace with your code below
     canvas.draw_text('Blackjack by Frank', (20, 60), 60, 'black')
-    canvas.draw_text(outcome, (40, 120), 30, 'black')
-    canvas.draw_text('Dealer', (20, 180), 40, 'black')
-    dealer_hand.draw(canvas, [20,200])
-    canvas.draw_text('Player', (20, 380), 40, 'black')
-    player_hand.draw(canvas, [20,400])  
-
+    canvas.draw_text(outcome, (20, 160), 30, 'blue')
+    canvas.draw_text('Player ' + str(player_wins) + ' : ' + str(dealer_wins) + ' Dealer', (20,120), 30, 'blue')
+    canvas.draw_text('Dealer', (20, 240), 40, 'black')
+    dealer_hand.draw(canvas, [20,260])
+    if in_play:
+        # hide the first card of dealer by drawing a card back on it.
+        # (20,260) is first position of dealer's card
+        canvas.draw_image(card_back, 
+                          (CARD_SIZE[0] * 0.5, CARD_SIZE[1] * 0.5), 
+                          CARD_BACK_SIZE, 
+                          [20 + CARD_BACK_SIZE[0] / 2, 260 + CARD_BACK_SIZE[1] / 2], 
+                          CARD_BACK_SIZE)
+    canvas.draw_text('Player', (20, 440), 40, 'black')
+    player_hand.draw(canvas, [20,460])  
 
 # initialization frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
@@ -168,10 +189,6 @@ frame.add_button("Hit",  hit, 200)
 frame.add_button("Stand", stand, 200)
 frame.set_draw_handler(draw)
 
-
 # get things rolling
 deal()
 frame.start()
-
-
-# remember to review the gradic rubric
