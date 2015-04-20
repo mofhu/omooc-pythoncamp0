@@ -9,8 +9,8 @@ import re
 # initalize globals
 WIDTH = 300
 HEIGHT = 300
-SIZE = 10
-color_in_use = 'Black'
+SIZE = 4
+color_in_use = '0,255,255'
 shape_in_use = 'Circle'
 size_in_use = SIZE
 drawing_list = []
@@ -39,39 +39,36 @@ class Pixel:
     def __init__(self, color, position):
         self.color = color
         self.position = position
+        
+    def __str__(self): # print for debugging
+        return self.color, self.position
+        
+    def draw(self, pixel_list):        
+        for i in pixel_list:
+            if i.position == self.position: 
+            # i.e. there are something in the new pixel, need to merge color
+                # first converse RGB to CMYK;
+                # then merge CMYK;
+                # final transfer back to RGB;
+                # i.color = (r, g, b). i.e. a tuple with 3 elements 
+                i.color = CMYK_to_RGB(merge_CMYK(RGB_to_CMYK(i.color), 
+                                      RGB_to_CMYK(self.color)))
+                return pixel_list        
+        pixel_list.append(self)
+        print len(pixel_list)
+        return pixel_list
 
 def draw_pixel(drawing):
     # draw by append every pixel in the single drawing to pixel list
-    global pixel_list
     i = 0 - drawing.size
     while i < drawing.size:
         j = 0 - drawing.size
         while j < drawing.size:
             if i * i + j * j < drawing.size * drawing.size:
                 new_pixel = Pixel(drawing.color, [drawing.position[0] + i, drawing.position[1] + j])
-                watercolor(new_pixel, pixel_list)
+                new_pixel.draw(pixel_list)
             j += 1
         i += 1
-
-def watercolor(new_pixel, pixel_list):
-    for i in pixel_list:
-        if i.position == new_pixel.position: 
-        # i.e. there are something in the new pixel, need to merge color
-        # first converse RGB to CMYK;
-        # then merge CMYK;
-        # final transfer back to RGB;
-        # i.color = (r, g, b). i.e. a tuple with 3 elements 
-            i.color = CMYK_to_RGB(merge_CMYK(RGB_to_CMYK(i.color), 
-                                             RGB_to_CMYK(new_pixel.color)))
-            # i.color = 'green' # just for testing
-            return
-    pixel_list.append(new_pixel)
-
-'''def HEX_to_RGB(color_HEX):
-
-def RGB_to_HEX(color_RGB):
-    # change into hex number
-    return '#'color_RGB[0]color_RGB[1]color_RGB[2]'''
 
 def RGB_to_CMYK(color_RGB):
     # the format is 'rgb(r,g,b)', cut rgb(), then translate into a int tuple
@@ -106,27 +103,12 @@ def paint(canvas):
     # as it is not supported to print on label
     for i in pixel_list:
         canvas.draw_point(i.position, i.color)
-    '''i = 0
-    while i < len(pos_list):
-        if shape_list[i] == 'Circle': # first use "=" instead, a "classic" error
-            canvas.draw_circle(pos_list[i], 20, 2, color_list[i], color_list[i])
-        elif shape_list[i] == 'Triangle':
-            canvas.draw_polygon([(pos_list[i][0],pos_list[i][1] + 20),
-                                (pos_list[i][0] + 10,pos_list[i][1] - 10),
-                                (pos_list[i][0] - 10,pos_list[i][1] - 10)],
-                                2, color_list[i])
-        else: # i.e.: shape_list == "square" 
-            canvas.draw_polygon([(pos_list[i][0] - 15,pos_list[i][1] + 15),
-                                (pos_list[i][0] + 15,pos_list[i][1] + 15),
-                                (pos_list[i][0] + 15,pos_list[i][1] - 15),
-                                (pos_list[i][0] - 15,pos_list[i][1] - 15)],
-                                2, color_list[i])
-        i += 1'''
+        print len(pixel_list)
     # protect from input when playing
     if UI_protect == True:
-    	    canvas.draw_text('Playing, not able to draw now.',
-    	    	            (20,20), 14, 'Black')
-    	    return
+            canvas.draw_text('Playing, not able to draw now.',
+                            (20,20), 14, 'Black')
+            return
     canvas.draw_text('Color in use: %s' % (color_in_use), 
                      (20, 20), 14, 'Black') 
     canvas.draw_text('Shape in use: %s' % (shape_in_use), 
@@ -155,14 +137,14 @@ def color_setter(color_input): # input color
         color_in_use = color_input
     # match reb #xxxxxx format
     elif re.match("^#[0-9a-fA-F]{6}$", color_input, ): 
-    	color_in_use = color_input
+        color_in_use = color_input
     else:
-    	# match color list
-    	for i in valid_color_list:
-    		if color_input.lower() == i:
-    			color_in_use = i
-    			return
-    	# wrong input
+        # match color list
+        for i in valid_color_list:
+            if color_input.lower() == i:
+                color_in_use = i
+                return
+        # wrong input
         print 'Wrong color input! Please input the right color format!'  '''  
 
 # set shapes
