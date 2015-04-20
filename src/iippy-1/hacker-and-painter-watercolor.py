@@ -9,8 +9,8 @@ import re
 # initalize globals
 WIDTH = 300
 HEIGHT = 300
-SIZE = 4
-color_in_use = '0,255,255'
+SIZE = 5
+color_in_use = 'rgb(0,255,255)'
 shape_in_use = 'Circle'
 size_in_use = SIZE
 drawing_list = []
@@ -41,7 +41,7 @@ class Pixel:
         self.position = position
         
     def __str__(self): # print for debugging
-        return self.color, self.position
+        return str(self.color), str(self.position)
         
     def draw(self, pixel_list):        
         for i in pixel_list:
@@ -103,7 +103,6 @@ def paint(canvas):
     # as it is not supported to print on label
     for i in pixel_list:
         canvas.draw_point(i.position, i.color)
-        print len(pixel_list)
     # protect from input when playing
     if UI_protect == True:
             canvas.draw_text('Playing, not able to draw now.',
