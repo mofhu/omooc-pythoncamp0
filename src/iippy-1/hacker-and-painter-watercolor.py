@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V1.1, 20150416
+# V1.2, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
@@ -55,7 +55,6 @@ class Pixel:
                                       RGB_to_CMYK(self.color)))
                 return pixel_list        
         pixel_list.append(self)
-        print len(pixel_list)
         return pixel_list
 
 def draw_pixel(drawing):
@@ -70,15 +69,17 @@ def draw_pixel(drawing):
             j += 1
         i += 1
 
+
 def RGB_to_CMYK(color_RGB):
     # the format is 'rgb(r,g,b)', cut rgb(), then translate into a int tuple
     color_RGB_cut = color_RGB.strip('rgb()')
     color_RGB_tuple = color_RGB_cut.split(',')
-    color_R = float(int(color_RGB_tuple[0]) / 255)
-    color_G = float(int(color_RGB_tuple[1]) / 255)
-    color_B = float(int(color_RGB_tuple[2]) / 255)
+    color_R = float(int(color_RGB_tuple[0])) / 255
+    color_G = float(int(color_RGB_tuple[1])) / 255
+    color_B = float(int(color_RGB_tuple[2])) / 255
     color_K = 1 - max(color_R, color_G, color_B)
     if color_K == 1:
+        # a special case: 1 - K = 0
         return (0, 0, 0, 1)
     else:
         return ((1 - color_R - color_K) / (1 - color_K), 
@@ -96,6 +97,7 @@ def CMYK_to_RGB(color_CMYK):
     color_G = int((255 * (1 - color_CMYK[1]) * (1 - color_CMYK[3])))
     color_B = int((255 * (1 - color_CMYK[2]) * (1 - color_CMYK[3])))
     return 'rgb' + str((color_R, color_G, color_B))
+    # return format 'rgb(r,g,b)'
 
 def paint(canvas): 
     # main print function
