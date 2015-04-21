@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V1.2, 20150416
+# V1.9, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import re
@@ -63,12 +63,22 @@ def draw_pixel(drawing):
     while i < drawing.size:
         j = 0 - drawing.size
         while j < drawing.size:
-            if i * i + j * j < drawing.size * drawing.size:
-                new_pixel = Pixel(drawing.color, [drawing.position[0] + i, drawing.position[1] + j])
+            distence = i * i + j * j
+            if distence < drawing.size * drawing.size:
+                drawing_color_CMYK = RGB_to_CMYK(drawing.color)
+                new_pixel = Pixel(CMYK_to_RGB(watercolor(drawing_color_CMYK, drawing.size * drawing.size, distence)), 
+                                  [drawing.position[0] + i, drawing.position[1] + j])
                 new_pixel.draw(pixel_list)
             j += 1
         i += 1
 
+def watercolor(color_CMYK, shape_size, distence):
+    # calculate the distence / max size ratio
+    watercolor_ratio = float(shape_size - distence) / shape_size
+    return (float(color_CMYK[0]) * watercolor_ratio, 
+            float(color_CMYK[1]) * watercolor_ratio,
+            float(color_CMYK[2]) * watercolor_ratio, 
+            float(color_CMYK[3]) * watercolor_ratio)
 
 def RGB_to_CMYK(color_RGB):
     # the format is 'rgb(r,g,b)', cut rgb(), then translate into a int tuple
