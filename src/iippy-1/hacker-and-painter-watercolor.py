@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # Author Frank Hu
 # Hacker and Painter, watercolor version
-# V1.9, 20150416
+# V2.0, 20150416
 
 import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+import random
 import re
 
 # initalize globals
 WIDTH = 300
 HEIGHT = 300
-SIZE = 5
+SIZE = 10
 color_in_use = 'rgb(0,255,255)'
 shape_in_use = 'Circle'
 size_in_use = SIZE
@@ -122,10 +123,9 @@ def paint(canvas):
             return
     canvas.draw_text('Color in use: %s' % (color_in_use), 
                      (20, 20), 14, 'Black') 
-    canvas.draw_text('Shape in use: %s' % (shape_in_use), 
-                     (20, 40), 14, 'Black') 
+    canvas.draw_polygon([(210, 5), (230,5), (230,25), (210,25)], 1, color_in_use, color_in_use)
     canvas.draw_text('Play interval in use: %s' % (interval),
-                     (20, 60), 14, 'Black') 
+                     (20, 40), 14, 'Black') 
 
 def append_drawing(mouse_click): # catch mouse click when not playing
     if UI_protect == False: #i.e. not protecting
@@ -136,33 +136,16 @@ def append_drawing(mouse_click): # catch mouse click when not playing
     
 def color_setter(color_input): # input color
     global color_in_use
-    # regular expression for robustness. Never be afraid of bad guys now, haha:) 
-    # return wrong in console
-    # the expression is found online. No time to learn it this week...
-    color_in_use = 'rgb(' + str(color_input) + ')'
-    '''valid_color_list = ['aqua', 'black', 'blue', 'fuchsia', 'gray',\
-                'green', 'lime', 'maroon', 'navy', 'olive', 'orange',\
-                'purple', 'red', 'silver', 'teal', 'white', 'yellow']
-    # match rgb #xxx format
-    if re.match("^#[0-9a-fA-F]{3}$", color_input, ): 
-        color_in_use = color_input
-    # match reb #xxxxxx format
-    elif re.match("^#[0-9a-fA-F]{6}$", color_input, ): 
-        color_in_use = color_input
-    else:
-        # match color list
-        for i in valid_color_list:
-            if color_input.lower() == i:
-                color_in_use = i
-                return
-        # wrong input
-        print 'Wrong color input! Please input the right color format!'  '''  
+    color_in_use = 'rgb(' + str(color_input) + ')' 
 
-# set shapes
-def shape_setter_circle():
-    global shape_in_use
-    shape_in_use = 'Circle'
+def random_color():
+    global color_in_use
+    random_color_tuple = (random.randrange(0,255),
+                          random.randrange(0,255),
+                          random.randrange(0,255))
+    color_in_use = 'rgb' + str(random_color_tuple)
 
+# next three functions for replay
 def play():
     # 1: process lists to temp place
     global drawing_list
@@ -209,7 +192,7 @@ def change_interval(interval_input): # change interval
     print interval
 
 # create frame
-frame = simplegui.create_frame('Canvas', WIDTH, HEIGHT)
+frame = simplegui.create_frame('Hacker and painter, watercolor version', WIDTH, HEIGHT)
 frame.set_canvas_background('White')
 frame.set_draw_handler(paint)
 
@@ -217,13 +200,12 @@ frame.set_draw_handler(paint)
 frame.set_mouseclick_handler(append_drawing) # get click position
 # use a input box to get color
 # rewrite it in a label...
-frame.add_input('Color: valid input is r,g,b. e.g.: 255,255,0 ',
+frame.add_input('Color: valid input is r,g,b. e.g.: 0,255,255',
                 color_setter, 150) 
-# 3 buttoms for setting shape
-frame.add_button('Circle', shape_setter_circle, 150) 
+# buttoms for setting shape and color
+frame.add_button('Random color', random_color, 150)
 # button to play whole progress
+frame.add_input('Play interval in ms', change_interval, 150)
 frame.add_button('Play', play, 150)
-frame.add_input('Play interval', change_interval, 150)
-
 #start frame
 frame.start()
