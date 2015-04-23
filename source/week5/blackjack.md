@@ -32,3 +32,26 @@ Coursera project week 7
      - 正确 an_instance.method()
      - 错误 an_instance.method
      - 这个错误最坑爹之处在于语法不会报错(在 codeskulptor中),但方法没有执行,即导致返回值错误.
+     - 函数也有同样情况,见下例:
+     
+```
+i = 0
+
+def test():
+    global i
+    i += 1
+    
+print i 
+
+test
+
+print i
+
+test()
+
+print i```
+
+Result in console:
+0
+0
+1
