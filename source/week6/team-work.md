@@ -20,7 +20,14 @@
 
 GitHub提供了大量适合多人异步协作的工具，小队在我的安利之下逐渐熟悉相关工具：
 
-1. Issue
+1. Git
+  - 使用 Branch 功能进行日常代码写作
+  - 相关命令如 git -b ... [git basics](my link)
+  - 常建立 dev/bug 等分支
+  - 一般情况下要用 pull-request 更新master，不可直接pull 到master
+  - ref: [liaoxuefeng's git tutorial](link)
+
+2. Issue
   - 基本功能是提出一个需要讨论的话题；可能是bug/功能升级/要讨论的内容等等
   - issue的open/close状态对应是否解决
   - 结合assign功能可以分配给相关人执行
@@ -28,5 +35,7 @@ GitHub提供了大量适合多人异步协作的工具，小队在我的安利�
   - issue可添加标签，并用milestone功能整合管理
   - 详细内容：[Mastering issue](github help)
 
-2. Wiki
-  - 一些通用介绍性文档适合放在wiki中
+3. Wiki
+  - 一些通用介绍性文档（对readme的补充）适合放在wiki中
+  - 如：项目如何使用的详细介绍，对不同系统的适应，等等
+
