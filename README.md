@@ -31,7 +31,7 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
   * [7.1 Proposal #3: iDoulist](source/week7/idoulist.md)
   * [7.2 团队协作的初步考虑](source/week7/team-work.md)
   * [7.3 如何推广一个项目 - QA by Zoom.Quiet](source/week7/how-to-anli-QA.md)
-  * [7.4 项目周报 - Week 0](source/week7/iDoulist-week0.md)
+  * [7.4 项目周报 - Week 0](source/week7/idoulist-week0.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)
 

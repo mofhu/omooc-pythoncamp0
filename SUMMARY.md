@@ -26,6 +26,6 @@
   * [Proposal #3: iDoulist](source/week7/idoulist.md)
   * [团队协作的初步考虑](source/week7/team-work.md)
   * [如何推广一个项目 - QA by Zoom.Quiet](source/week7/how-to-anli-QA.md)
-  * [项目周报 - Week 0](source/week7/iDoulist-week0.md)
+  * [项目周报 - Week 0](source/week7/idoulist-week0.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)
