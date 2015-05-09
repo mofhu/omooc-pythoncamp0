@@ -1,0 +1,7 @@
+- crosstalk in modules
+  - module 名字不能用"-", 考虑用下划线"_"
+- raw_input - py doc
+- file.write - py doc
+- re need second look..
+- close issues by commit messages
+  - ref [github](https://help.github.com/articles/closing-issues-via-commit-messages/)
