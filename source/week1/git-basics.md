@@ -33,11 +33,10 @@ Let's begin!
 	in right folder first.
 
 2. `git add <file>`
-	
-	we can use "*", etc.
-
-	eg. git add "*.md"
-
+  - we can use "*", etc.
+  - eg. `git add "*.md"`
+  - `git add .` to add all to commit
+  - a `.gitignore` file 可用来标记出不想被 git 记录的文件, 如 .pyc 文件
 3. `git commit`
 
 	need some details
