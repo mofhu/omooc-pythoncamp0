@@ -80,7 +80,19 @@ iDoulist/                          Top-level package
   from process import function0_process
   from output import function0_output
   ```
-  
+
+- 小结
+   - 又一次从实践中遇到问题的学习过程
+   - 两点老调重弹
+     - 学习者不应幻想自己全都会 ---- 首先要接受事实, 接受随时可能发现新问题
+       - 最基础的原则: 不应脱离现实
+       - 另外, 接受"自己有很多不懂的地方"并不是坏事
+       - 要有随时学习新事物的觉悟和信心
+       - 行动方面(不只是编程呦!), 不要慌张, 先平静心态接受事实(也不过分解读), 再用自己的常识分解问题尝试解决
+     - 学习时的路径记录
+       - 过了一段时间, 感觉这次就又忘得差不多了..
+       - 再记录一次, 常常 google - stackoverflow - python doc
+       - 写下来贴显示器
 ## Ref.
 - [Py doc](https://docs.python.org/2/tutorial/modules.html)
 - [PEP 0328 -- Imports: Multi-Line and Absolute/Relative](https://www.python.org/dev/peps/pep-0328/)
