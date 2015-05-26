@@ -11,6 +11,7 @@
 ## 成员
 
 按字母顺序排列:
+
 - [Frank Hu](https://github.com/Frank-the-Obscure), [教程](https://www.gitbook.com/book/frank-the-obscure/pythoncamp0/details)
 - [huhu zhu](https://github.com/huhu8), [教程](https://github.com/huhu8/pythoncamp0)
 - [Iris Lee](https://github.com/nicetag), [教程?](?)
@@ -26,4 +27,5 @@
 - 下周计划初稿 [iDoulist Plan week 1](https://github.com/Frank-the-Obscure/iDoulist/wiki/iDoulist-%E5%8D%8F%E4%BD%9C%E5%BB%BA%E8%AE%AE)
 
 ## 需要帮助的问题
+
 - 暂无(具体的代码竟然无进展...拉人的 Frank 君没有带好头, 表示压力山大, 请同组小伙伴谅解)
