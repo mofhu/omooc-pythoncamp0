@@ -1,6 +1,8 @@
 # iDoulist week 3 演示小结文字版
 presentation by Frank Hu
 
+---
+
 1. 项目概述
   - 此次进步: 演示思路有纸面规划
     - 概述-Mindmap-GUI-output示例(CLI, 豆列输出)

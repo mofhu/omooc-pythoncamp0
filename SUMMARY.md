@@ -40,5 +40,7 @@
   * [week 9 QA](source/week9/week9-QA.md)
 * Week 10
   * [Tkinter 绘制图形界面](source/week10/tkinter.md)
+  * [iDoulist week3 小结](source/week10/idoulist-week3.md)
+  * [Week10 QA](source/week10/week10-QA.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)
