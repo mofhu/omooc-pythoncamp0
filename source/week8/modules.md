@@ -3,15 +3,18 @@
 ## Outline 
 - 一个来自实践的问题: 如何导入不同文件夹的文件作为 module?
   - 原型中把几个文件放置在同一个文件夹中, 避免了不同文件夹的访问方式问题
-  ```
+ 
+  ```python
   import function0_UI
   import function0_input
   import function0_process
   import function0_output
   ```
+  
   - It does not scale! 项目规模增大后并不是好选择. 应分开几个文件夹放置, 便于管理, 理解与使用
   - google 后, 迅速回到 py doc, 通读 Modules 章节后基本理解; 更多例子见 PEP 0328
-```
+  
+```python
 sound/                          Top-level package
       __init__.py               Initialize the sound package
       formats/                  Subpackage for file format conversions
@@ -36,6 +39,7 @@ sound/                          Top-level package
               karaoke.py
               ...
 ```
+
     Users of the package can import individual modules from the package, for example:
     `import sound.effects.echo`
     This loads the submodule sound.effects.echo. It must be referenced with its full name.
@@ -53,7 +57,7 @@ sound/                          Top-level package
     
   - 对于目前版本, 使用 import folder.module 格式即可, 还不需要进行相对引用.
   
-```
+```python
 iDoulist/                          Top-level package
       __init__.py 
       function0_MVP.py
@@ -68,13 +72,14 @@ iDoulist/                          Top-level package
       ...
 ```
 
-  ```
+  ```python
   import UI.function0_UI
   import input.function0_input
   import process.function0_process
   import output.function0_output
   ```
-  ```
+  
+  ```python
   from UI import function0_UI
   from input import function0_input
   from process import function0_process

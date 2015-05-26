@@ -28,4 +28,17 @@
   * [如何推广一个项目 - QA by Zoom.Quiet](source/week7/how-to-anli-QA.md)
   * [项目周报 - Week 0](source/week7/idoulist-week0.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
+* Week 8
+  * [iDoulist 抓取网页信息](source/week8/idoulist-function0-input.md)
+  * [Python 模块的互相调用](source/week8/modules.md)
+  * [如何推广一个项目 - QA by Zoom.Quiet](source/week7/how-to-anli-QA.md)
+  * [week 8 QA](source/week8/week8-QA.md)
+* Week 9
+  * [再谈抓取: urllib2+re](source/week9/urllib-re.md)
+  * [PyAutoGUI 模拟鼠标键盘操作](source/week9/pyautogui)
+  * [iDoulist week2 小结](source/week9/idoulist-week2.md)
+  * [week 9 QA](source/week9/week9-QA.md)
+* Week 10
+  * [Tkinter 绘制图形界面](source/week10/tkinter.md)
+* [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)

@@ -1,6 +1,8 @@
 # iDoulist 演示 week 2
 by Frank Hu
 
+---
+
 1. 项目概述
   - 脑图描述代码实现思路
   - 迭代
