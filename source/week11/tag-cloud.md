@@ -16,6 +16,10 @@
 1. 抓取一本书的标签 douban api 并测试
 2. 输出一本书的标签: MVP
 
+### Minor notes
+py lib 目录位置在 pyenv.....中
+
+---
 refs
 
 https://github.com/amueller/word_cloud
