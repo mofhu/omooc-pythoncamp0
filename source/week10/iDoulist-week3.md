@@ -1,5 +1,5 @@
 # iDoulist week 3 演示小结文字版
-presentation by Frank Hu
+presentation by Frank Hu, 20150522
 
 ---
 
