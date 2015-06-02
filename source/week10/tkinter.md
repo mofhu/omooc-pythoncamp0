@@ -1,4 +1,8 @@
-# 用 Tkinter 进行 GUI 交互
+# 用 Tkinter 进行 GUI 交互
+
+## Outline
+- Tkinter 简介
+- iDoulist 图形界面实现
 
 ## Tkinter 简介
 Tkinter 是 Python 自带的模块, 可进行基本的 GUI (图形界面) 绘制
@@ -57,7 +61,7 @@ root.destroy()
 
 ttk 是一个对 tk 的封装小工具.
 
-一段典型代码(from ref. 1):
+一段典型代码(from [TkDocs-a first example](http://www.tkdocs.com/tutorial/firstexample.html)):
 
 ```python
 from tkinter import *
@@ -100,6 +104,12 @@ root.bind('<Return>', calculate)
 
 root.mainloop()
 ```
+
+## iDoulist的图形界面与交互
+参考[TkDocs-a first example](http://www.tkdocs.com/tutorial/firstexample.html), 绘制一个(相对)整齐的图形界面.    
+绘制具体考虑:
+- 区分不同功能的位置(按照输入-处理-输出)
+- 通过不同按钮, 也可以简化某些交互内容的复杂性(因有两个豆列可能同时用于输入的情况)
 
 ---
 ### References

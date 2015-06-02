@@ -1,8 +1,8 @@
-# 用 python 简单抓取网页的内容 - Urllib 和 正则表达式
+# 用 Python 抓取网页的特定内容 - Urllib 和 正则表达式
 
 ## Outline
 1. 缘起
-2. urllib
+2. urllib2
 3. re
 
 ## 缘起: iDoulist 项目的需求
@@ -11,8 +11,8 @@
 起初试图使用著名的 Scrapy, 但发现无从下手. 
 大妈给出了 `42 分钟建议`: **42 分钟无法了解并写出可用原型, 说明不适合当下的自己**.
 
-## urllib
-经过另一番搜索, 发现 py 自带的 urllib 似乎已经足可实现原型功能.
+## urllib2
+经过另一番搜索, 发现 py 自带的 urllib2 似乎已经足可实现原型功能.
 如何使用这个库抓取信息呢?
 最简使用方法: (py 2.7.9)
 
@@ -22,6 +22,13 @@ response = urllib2.urlopen(url_link) #抓取link的网页信息(纯文本)
 print response.read() #把网页信息打印出来
 ```
 
+urllib 还可实现对网页的访问(request)等功能. 
+ref: py doc urllib
+
+## 正则表达式 (regular expression)
+抓取到网页信息之后, 下一步是从网页中提取指定信息. 这个步骤主要是进行模式匹配, 正则表达式是字符串匹配的基本工具.  
+python 中自带正则表达式模块 re. 常用函数 `re.match`, `re.search`, `re.findall`
+
 实例
 
 ```python
@@ -30,7 +37,29 @@ response = urllib2.urlopen('http://www.douban.com/doulist/14090587/') # 抓取�
 s = re.findall('http://book.douban.com/subject/[0-9]*/', response.read()) # 用正则表达式匹配字符串, 找到豆列中的书籍链接
 ```
 
-一个大坑, 和 findall 导出的对象格式有关, 见下面代码:
+`s = re.search('http://www.douban.com/doulist/[0-9]*/', input_url)`  
+匹配`/一串数字/`
+
+`re.search('http://book.douban.com/people/.*?/do|http://book.douban.com/people/.*?/wish|http://book.douban.com/people/.*?/collect', doulist_url)`   
+判断豆瓣想读格式 xxx/do|wish|collect 
+
+`i_book_num = re.search('\d+', i)`  
+在 i 中寻找数字(书籍链接中的书号), 后续用来访问豆瓣 api
+
+前导串(example in py doc)
+
+```python
+>>> import re
+>>> m = re.search('(?<=abc)def', 'abcdef')
+>>> m.group(0)
+'def'
+
+>>> m = re.search('(?<=-)\w+', 'spam-egg')
+>>> m.group(0)
+'egg'
+```
+
+一个大坑, 和 findall 导出的对象格式和中文编码有关, 见下面代码:
 
 ```python
 # -*- coding: utf-8 -*-
@@ -61,40 +90,6 @@ response(book_url)
 
 20150528 晚上都在折腾从上面的未识别 utf8如何到中文...
 
-后续需要的测试: 如何匹配中文?
-
-
-urllib 还可实现对网页的访问(request)等功能. 
-ref: py doc urllib
-
-## 正则表达式
-抓取到网页信息之后, 下一步是从网页中提取指定信息.
-这个步骤主要是进行模式匹配. 正则表达式是字符串匹配的基本工具.
-python 中自带正则表达式模块 re.
-
-`s = re.search('http://www.douban.com/doulist/[0-9]*/', input_url)`
-匹配`/一串数字/`
-
-`re.search('http://book.douban.com/people/.*?/do|http://book.douban.com/people/.*?/wish|http://book.douban.com/people/.*?/collect', doulist_url)`
-判断豆瓣想读格式 xxx/do|wish|collect 
-
-`i_book_num = re.search('\d+', i)`  
-在 i 中寻找数字(书籍链接中的书号), 后续用来访问豆瓣 api
-
-前导串(example in py doc)
-
-```python
->>> import re
->>> m = re.search('(?<=abc)def', 'abcdef')
->>> m.group(0)
-'def'
-
->>> m = re.search('(?<=-)\w+', 'spam-egg')
->>> m.group(0)
-'egg'
-```
-
-
 
 
 
@@ -106,3 +101,6 @@ ref:
 - [7 Python Regular Expressions Examples – Re Match Search FindAll](http://www.thegeekstuff.com/2014/07/python-regex-examples/), 
 [中文翻译](http://blog.jobbole.com/74844/)
 - [正则表达式入门教程](http://deerchao.net/tutorials/regex/regex.htm)
+- [Pragmatic Unicode, by Ned Batchelder](http://nedbatchelder.com/text/unipain.html), [中文翻译 by yudun1989](http://pycoders-weekly-chinese.readthedocs.org/en/latest/issue5/unipain.html)
+- [Python正则表达式匹配中文](http://blog.csdn.net/gatieme/article/details/43235791)
+
