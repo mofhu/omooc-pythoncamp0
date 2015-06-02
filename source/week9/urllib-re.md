@@ -72,7 +72,37 @@ ref: py doc urllib
 这个步骤主要是进行模式匹配. 正则表达式是字符串匹配的基本工具.
 python 中自带正则表达式模块 re.
 
+`s = re.search('http://www.douban.com/doulist/[0-9]*/', input_url)`
+匹配`/一串数字/`
 
-ref: py doc re; linux user re guide
+`re.search('http://book.douban.com/people/.*?/do|http://book.douban.com/people/.*?/wish|http://book.douban.com/people/.*?/collect', doulist_url)`
+判断豆瓣想读格式 xxx/do|wish|collect 
 
-http://deerchao.net/tutorials/regex/regex.htm
+`i_book_num = re.search('\d+', i)`  
+在 i 中寻找数字(书籍链接中的书号), 后续用来访问豆瓣 api
+
+前导串(example in py doc)
+
+```python
+>>> import re
+>>> m = re.search('(?<=abc)def', 'abcdef')
+>>> m.group(0)
+'def'
+
+>>> m = re.search('(?<=-)\w+', 'spam-egg')
+>>> m.group(0)
+'egg'
+```
+
+
+
+
+
+---
+ref: 
+
+- [py doc re](https://docs.python.org/2/library/re.html)
+- [Python正则表达式-w3cschool.cc](http://www.w3cschool.cc/python/python-reg-expressions.html)
+- [7 Python Regular Expressions Examples – Re Match Search FindAll](http://www.thegeekstuff.com/2014/07/python-regex-examples/), 
+[中文翻译](http://blog.jobbole.com/74844/)
+- [正则表达式入门教程](http://deerchao.net/tutorials/regex/regex.htm)
