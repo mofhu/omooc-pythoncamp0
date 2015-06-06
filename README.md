@@ -42,7 +42,6 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
   * [PyAutoGUI 模拟鼠标键盘操作](source/week9/pyautogui)
   * [iDoulist week2 小结](source/week9/idoulist-week2.md)
   * [week 9 QA](source/week9/week9-QA.md)
-
 * Week 10
   * [Tkinter 绘制图形界面](source/week10/tkinter.md)
   * [iDoulist week3 小结](source/week10/idoulist-week3.md)
@@ -52,6 +51,10 @@ Copyright [Frank Hu](https://github.com/Frank-the-Obscure), 2015
   * [iDoulist week4 小结](source/week11/idoulist-week4.md)
   * [绘制标签云](source/week11/tag-cloud.md)
   * [Unicode and Chinese in Python](source/week11/unicode-chinese.md)
+* Week 12
+  * [iDoulist script for demo v1.0](source/week12/idoulist-show.md)
+  * [iDoulist demo show](source/week12/idoulist-show-final.md)
+* [编外编: 不确定情况下的学习](source/study-under-uncertainty.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)
 
