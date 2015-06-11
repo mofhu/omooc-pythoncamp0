@@ -18,7 +18,7 @@ Coursera project week 7
    - 完成抽象层构建后,后续内容全部可在抽象层完成,可无视代码实现细节
    - 此即 OOP 的作用之一
    - 中间有一个诱惑是把 Deck 用 Hand 方法实现,仔细想来不妥
-     - 想实现要调用 Hand.list 才可,但 Hand.list 只用来存数据,不应被设计为方法,方法只使用 \__str__ 和 返回值
+     - 想实现要调用 Hand.list 才可,但 Hand.list 只用来存数据,不应被设计为方法,方法只使用 `__str__ `和 返回值
     - 更合理的思路是用 Card 分别实现 Hand 和 Deck
       - 逻辑更清晰,减少了三者的耦合.这样构建的 Deck 更容易复用
       
@@ -31,7 +31,7 @@ Coursera project week 7
    - 与 coursera template 的正对照比较之后发现, 问题出在调用方法的格式上:
      - 正确 an_instance.method()
      - 错误 an_instance.method
-     - 这个错误最坑爹之处在于语法不会报错(在 codeskulptor中),但方法没有执行,即导致返回值错误.
+     - 这个错误最坑爹之处在于语法不会报错(在 codeskulptor 中),但方法没有执行,即导致返回值错误.
      - 函数也有同样情况,见下例:
      
 ```
