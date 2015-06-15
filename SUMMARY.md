@@ -50,7 +50,8 @@
   * [iDoulist script for demo v1.0](source/week12/idoulist-show.md)
   * [iDoulist demo show](source/week12/idoulist-show-final.md)
 * Week 13
-  * [结业典礼 Frank Hu 的分享稿](source/week13/ending-my-note.md)
+  * [大妈北京结业小结](source/week13/ending-beijing-dama.md)
+  * [结业典礼----Frank Hu 的分享稿](source/week13/ending-my-note.md)
 * [编外编: 不确定情况下的学习](source/study-under-uncertainty.md)
 * [编外编: Meta-programming?](source/meta-programming.md)
 * [结尾](source/end.md)
