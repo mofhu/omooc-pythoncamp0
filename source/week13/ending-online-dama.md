@@ -59,3 +59,8 @@
   - 对于本课程 500+ line 50+ commit 是基础
 - 很多坚持到最后的同学实现了0-1的跃迁
 - 大妈和仁波切的自信: 通过移动互联网和线下结合, 用12周左右让大家建立合理合格的编程思想, 是完全可行的. 
+
+References:  
+
+- [资源合集](http://openmindclub.qiniudn.com/res/tapes/150612-online-close/index.html)
+- [Chaonet 的详尽总结](http://chaonet.gitbooks.io/pythoncamp0/content/Chapter-2/Py+last+week.html)
