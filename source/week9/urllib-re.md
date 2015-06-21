@@ -9,6 +9,7 @@
 项目首先需要获取豆列中的特定信息, 如内容的链接, 书名等.
 考虑到后续处理难度, 链接是唯一的更易操作, 在原型中希望抓取链接.
 起初试图使用著名的 Scrapy, 但发现无从下手. 
+
 大妈给出了 `42 分钟建议`: **42 分钟无法了解并写出可用原型, 说明不适合当下的自己**.
 
 ## urllib2
@@ -23,13 +24,77 @@ print response.read() #把网页信息打印出来
 ```
 
 urllib 还可实现对网页的访问(request)等功能. 
+
 ref: py doc urllib
 
 ## 正则表达式 (regular expression)
-抓取到网页信息之后, 下一步是从网页中提取指定信息. 这个步骤主要是进行模式匹配, 正则表达式是字符串匹配的基本工具.  
+抓取到网页信息之后, 下一步是从网页中提取指定信息. 这个步骤主要是进行大量的字符串信息匹配, 正则表达式是字符串匹配的基本工具.  
+正则表达式是什么呢? 一种表达世间万物的方式(大雾)...更具体地说, 程序员为了对大量字符串进行匹配, 比如今天匹配 apple, 明天匹配 orange, 后天匹配 apple 后面的 orange...单词无穷无尽, 实在是太麻烦了. 于是他们设计了一套复杂的匹配系统, 用各种匹配符来简化匹配操作.
+
 python 中自带正则表达式模块 re. 常用函数 `re.match`, `re.search`, `re.findall`
 
-实例
+re.MatchObject
+
+基本实例:
+
+1 basic example
+
+```python
+import re
+print re.search('apple', 'apple')
+print re.search('apple', 'orange')
+match = re.search('apple', 'apple')
+if match:
+    print match.group() 
+    
+<_sre.SRE_Match object at 0x105d87308>
+None
+apple
+```
+
+2 re.search vs re.match
+
+```python
+import re
+print re.search('apple', '1apple') #re.search 从字符串中查找, 任意位置开始都可以
+print re.match('apple', '1apple') #re.match 只从字符串开始匹配
+
+<_sre.SRE_Match object at 0x105d87238>
+None
+```
+
+3 re.findall
+
+```python
+print re.findall('a', 'abdcai') #re.findall 返回一个列表
+
+['a', 'a']
+```
+
+4 最基本的通配符
+
+```
+. (默认情况下)匹配除换行符 \n 以外的任意其它字符
+\d 匹配数字
+* 贪婪匹配零次或多次
+? 吝啬匹配
+| 逻辑或
+[] 用于表示一组字符, 如 \d = [0-9]
+
+print re.findall('ap..e', 'apple aplle apllo')
+print re.findall('ap.*', 'apple aplle apllo') # *是贪婪匹配, 会直接匹配整行
+print re.findall('ap.*?', 'apple aplle apllo') # 加上?之后则最少匹配了
+print re.findall('ap.*? ', 'apple aplle apllo') # 加上?和 空格
+
+['apple', 'aplle']
+['apple aplle apllo']
+['ap', 'ap', 'ap']
+['apple ', 'aplle ']
+```
+
+5 
+
+## iDoulist 正则表达式应用实例
 
 ```python
 # import urllib2
@@ -41,12 +106,12 @@ s = re.findall('http://book.douban.com/subject/[0-9]*/', response.read()) # 用�
 匹配`/一串数字/`
 
 `re.search('http://book.douban.com/people/.*?/do|http://book.douban.com/people/.*?/wish|http://book.douban.com/people/.*?/collect', doulist_url)`   
-判断豆瓣想读格式 xxx/do|wish|collect 
+用吝啬匹配用户名, 用逻辑或判断豆瓣想读格式 xxx/do|wish|collect 
 
 `i_book_num = re.search('\d+', i)`  
 在 i 中寻找数字(书籍链接中的书号), 后续用来访问豆瓣 api
 
-前导串(example in py doc)
+前导串, 可用于在提取同时去掉不需要的前导部分.(example in py doc)
 
 ```python
 >>> import re
@@ -59,45 +124,48 @@ s = re.findall('http://book.douban.com/subject/[0-9]*/', response.read()) # 用�
 'egg'
 ```
 
-一个大坑, 和 findall 导出的对象格式和中文编码有关, 见下面代码:
+一个大坑, 和 findall 导出的对象格式和中文编码有关, 见 unicode 和中文编码章节
 
-```python
-# -*- coding: utf-8 -*-
-# Author Frank Hu
-# iDoulist output_tag_cloud.py
 
-import re
-import urllib2
+## 更多的正则表达式字符串处理例子
 
-book_url = 'https://api.douban.com/v2/book/1139336'
+字符串处理是获取特定信息的基本手段. 在其它个人项目中也反复锤炼了基本技能...
 
-def response(book_url):
-    response = urllib2.urlopen(book_url)
-    raw_data = re.findall('"tags".*?]', response.read())
-    print str(raw_data) # 错误的访问方式
-    for i in raw_data: 
-        print i # 正确的访问方式
+1 flags: re.S 多行模式, 可匹配 \n 的多行输入
 
-response(book_url)
+```
+print re.findall('ap..e', 'app\ne aplle apllo')
+print re.findall('ap..e', 'app\ne aplle apllo', flags=re.S)
+
+['aplle']
+['app\ne', 'aplle']
 ```
 
-运行结果
+2 `re.split(pattern, string, maxsplit=0, flags=0)`: 用特定 pattern 分隔 string
 
-```python
-['"tags":[{"count":2143,"name":"C","title":"C"},{"count":1397,"name":"\xe7\xbc\x96\xe7\xa8\x8b","title":"\xe7\xbc\x96\xe7\xa8\x8b"},{"count":1363,"name":"c\xe8\xaf\xad\xe8\xa8\x80","title":"c\xe8\xaf\xad\xe8\xa8\x80"},{"count":802,"name":"\xe8\xae\xa1\xe7\xae\x97\xe6\x9c\xba","title":"\xe8\xae\xa1\xe7\xae\x97\xe6\x9c\xba"},{"count":714,"name":"\xe7\xa8\x8b\xe5\xba\x8f\xe8\xae\xbe\xe8\xae\xa1","title":"\xe7\xa8\x8b\xe5\xba\x8f\xe8\xae\xbe\xe8\xae\xa1"},{"count":666,"name":"\xe7\xbb\x8f\xe5\x85\xb8","title":"\xe7\xbb\x8f\xe5\x85\xb8"},{"count":468,"name":"programming","title":"programming"},{"count":408,"name":"\xe7\xbc\x96\xe7\xa8\x8b\xe8\xaf\xad\xe8\xa8\x80","title":"\xe7\xbc\x96\xe7\xa8\x8b\xe8\xaf\xad\xe8\xa8\x80"}]']
-"tags":[{"count":2143,"name":"C","title":"C"},{"count":1397,"name":"编程","title":"编程"},{"count":1363,"name":"c语言","title":"c语言"},{"count":802,"name":"计算机","title":"计算机"},{"count":714,"name":"程序设计","title":"程序设计"},{"count":666,"name":"经典","title":"经典"},{"count":468,"name":"programming","title":"programming"},{"count":408,"name":"编程语言","title":"编程语言"}]
+3 提取特定字符串信息, 前导串可用于简单加工
+
+```
+i = 'player 162 action fold\nplayer 162 action check\n'
+actions = re.findall('player 162 action .*?\n', i, flags=re.S)
+print actions
+​
+actions = re.findall('(?<=player 162 action ).*?\n', i, flags=re.S)
+print actions
+
+['player 162 action fold\n', 'player 162 action check\n']
+['fold\n', 'check\n']
 ```
 
-20150528 晚上都在折腾从上面的未识别 utf8如何到中文...
+### 小结:
 
-
-
+这里的正则表达式都只是最简单的应用, 未用到复杂的匹配模式, 但原理是相通的. 正则表达式的语法相对来说比较晦涩, 因此, 这里希望通过相对较多的例子, 唤醒自己快速从已有例子修改, 形成可用的正则表达式.
 
 ---
-ref: 
+References: 
 
 - [py doc re](https://docs.python.org/2/library/re.html)
-- [Python正则表达式-w3cschool.cc](http://www.w3cschool.cc/python/python-reg-expressions.html)
+- [Python正则表达式 - w3cschool.cc](http://www.w3cschool.cc/python/python-reg-expressions.html)
 - [7 Python Regular Expressions Examples – Re Match Search FindAll](http://www.thegeekstuff.com/2014/07/python-regex-examples/), 
 [中文翻译](http://blog.jobbole.com/74844/)
 - [正则表达式入门教程](http://deerchao.net/tutorials/regex/regex.htm)
